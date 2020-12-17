@@ -1,0 +1,16 @@
+Changes I wanna make:
+	
+Entity.h:
+	-Remove the EntityManager reference from this class it should not know about the manager, only the other way around. 
+	 So whenever adding a new Entity, its gonna look like EntityManager.addEntity(std::string name);
+
+	-Maybe make animations a component instead of a member variable of the sprite component? In the way that we can call 
+	 Entity.AddComponent<Animation>()?
+	
+	-Replace std::string to const char* where possible
+
+EntityManager.cpp
+	-On Render() make a way of fetching the entity by the layer number instead of callig a method every time
+
+Add tags to entities class
+Make it so collisions between 2 non-trigger box colliders prevent the objects from overlapping
