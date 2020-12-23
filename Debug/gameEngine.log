@@ -1,15 +1,17 @@
 ﻿  Collision.cpp
   EntityManager.cpp
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\EntityManager.cpp(84,21): warning C4018: '<': signed/unsigned mismatch
   Game.cpp
-C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Game.cpp(148,67): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Game.cpp(156,67): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Game.cpp(149,67): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Game.cpp(157,67): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
   Generating Code...
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\EntityManager.cpp(106): warning C4715: 'EntityManager::CheckEntityCollisions': not all control paths return a value
   gameEngine.vcxproj -> C:\Users\pwilt\source\repos\gameEngine\Debug\gameEngine.exe

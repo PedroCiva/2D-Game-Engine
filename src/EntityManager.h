@@ -8,7 +8,7 @@
 class EntityManager {
 private:
 	//List of all entities
-	std::vector <Entity*> entities;
+	inline static std::vector <Entity*> entities;
 public:
 	void ClearData(); //Destroys everything
 	void Update(float deltaTime);
@@ -19,7 +19,7 @@ public:
 	std::vector<Entity*> GetEntitiesByLayer(LayerType layer) const;//Returns all entities
 	unsigned int GetEntityCount();
 	void PrintEntitiesList() const;
-	std::string CheckEntityCollisions(Entity& entity) const;
+	static bool CheckEntityCollisions(Entity* entity);
 };
 
 

@@ -33,7 +33,7 @@ public:
 	template <typename T, typename... TArgs> //Add component method template.
 	T& AddComponent(TArgs&&... args) { //TArgs have a double ampersand because the values passed are rvalues,roughly meaning we just wanna use them once 
 		T* newComponent(new T(std::forward<TArgs>(args)...)); //Creating new component of type T and managing the args to handle our rvalues parameters with std::forward
-		newComponent->owner = this;//component owner = this
+		newComponent->gameObject = this;//component gameObject = this
 		components.emplace_back(newComponent); //Adding the component to this list of components
 		newComponent->Initialize(); // Initializing component
 		componentTypeMap[&typeid(*newComponent)] = newComponent; //Adding key and value pair (component info and component) to our dictionary

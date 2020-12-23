@@ -1,7 +1,11 @@
 #include <iostream>
 #include "EntityManager.h"
 #include "Collision.h"
+#include "LayerMatrix.h"
 #include "Components/ColliderComponent.h"
+
+//Defining Collider component static member
+ColliderComponent ColliderComponent::otherColliderComponent;
 
 void EntityManager::ClearData() {
 	for (auto& entity : entities)
@@ -63,23 +67,43 @@ void EntityManager::PrintEntitiesList() const{
 	}
 }
 
-std::string EntityManager::CheckEntityCollisions(Entity& myEntity) const {
-	ColliderComponent *myColliderPtr = myEntity.GetComponent<ColliderComponent>();
-	ColliderComponent myCollider = *myColliderPtr;
-	for (auto& entity : entities) {
-		if (entity->name.compare(myEntity.name) != 0 && entity->name.compare("Tile") != 0) {
-			if (entity->HasComponent<ColliderComponent>())
+/// <summary>
+/// Checks for any collisions with a certain entity and assigns the ColliderComponent of the object we collided with
+/// </summary>
+/// <param name="entity"> The entity to check the collisions for </param>
+/// <returns> Returns true or false depending wether a collisions happened or not </returns>
+bool EntityManager::CheckEntityCollisions(Entity* entity){	
+	auto& thisEntity = entity;
+	//Safe check for component
+	if (thisEntity->HasComponent<ColliderComponent>())
+	{
+		//Grabing entity collider component
+		ColliderComponent* thisCollider = thisEntity->GetComponent<ColliderComponent>();
+
+		//Looping through all entities to check for collision with thisCollider (comes from thisEntity)
+		for (int j = 0; j < entities.size(); j++) 
+		{
+			auto& thatEntity = entities[j];
+
+			//If the colliders have different names and thatEntity has a collider component
+			if (thisEntity->name.compare(thatEntity->name) != 0 && thatEntity->HasComponent<ColliderComponent>()) 
 			{
-				ColliderComponent *otherColliderPtr = entity->GetComponent<ColliderComponent>();
-				ColliderComponent otherCollider = *otherColliderPtr;
-				if (Collision::CheckRectangleCollision(myCollider, otherCollider))
-				{
-					return otherCollider.colliderTag;
-				}							
+				ColliderComponent* thatCollider = thatEntity->GetComponent<ColliderComponent>();
+				
+				if (Collision::CheckRectangleCollision(*thisCollider, *thatCollider))
+				{		
+					//Set the otherColliderComponent to thatCollider (for use on OnCollisionEnter in ColliderComponent.h)
+					ColliderComponent::otherColliderComponent = *thatCollider;
+
+					//If there is a collision, check if the 2 objects even should collide based on the Collision Layer Matrix
+					return (LayerMatrix::ShouldCollide(thisCollider->gameObject->layer, thatCollider->gameObject->layer));
+				}	
+				//If there is no collision between them return false
+				return false;
 			}
 		}
 	}
-	return std::string();
 }
+
 
 

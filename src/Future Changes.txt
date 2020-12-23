@@ -12,5 +12,8 @@ Entity.h:
 EntityManager.cpp
 	-On Render() make a way of fetching the entity by the layer number instead of callig a method every time
 
-Add tags to entities class
-Make it so collisions between 2 non-trigger box colliders prevent the objects from overlapping
+
+-Add tags to entities class
+-Make it so collisions between 2 non-trigger box colliders prevent the objects from overlapping
+
+-Add Debug and color to text

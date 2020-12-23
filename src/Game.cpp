@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "AssetManager.h"
 #include "Map.h"
+#include "LayerMatrix.h"
 #include <../src/Components/TransformComponent.h>
 #include <../src/Components/SpriteComponent.h>
 #include <../src/Components/ColliderComponent.h>
@@ -63,8 +64,15 @@ void Game::Initialize(int width, int height)
 	return;
 }
 
-Entity& player(manager.AddEntity("chopper", PLAYER_LAYER));
+Entity& player(manager.AddEntity("Player", PLAYER_LAYER));
 void Game::LoadLevel(int levelNumber){
+
+	LayerMatrix layerMatrix;
+
+	//TO DO -
+	//Add call to EntityManager.Initialize() to initialize all entities
+	//manager.Initialize();
+
 	//Start including new assets to the AssetManager list
 	assetManager->AddTexture("tank-image", "./assets/images/tank-big-right.png"); //Adding texture to texture manager
 	assetManager->AddTexture("chopper-image", "./assets/images/chopper-spritesheet.png"); //Adding texture to texture manager
@@ -84,7 +92,7 @@ void Game::LoadLevel(int levelNumber){
 	Entity& tank(manager.AddEntity("tank",ENEMY_LAYER));
 	tank.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tank.AddComponent<SpriteComponent>("tank-image");
-	tank.AddComponent<ColliderComponent>("enemy", 64, 64);
+	tank.AddComponent<ColliderComponent>();
 
 	manager.PrintEntitiesList();
 }
@@ -156,11 +164,11 @@ void Game::HandleCameraMovement() {
 }
 
 void Game::CheckCollisions() {
-	std::string collisionTagType = manager.CheckEntityCollisions(player);
+	/*std::string collisionTagType = manager.CheckEntityCollisions(player);
 	if (collisionTagType.compare("enemy") == 0) {
 		//TODO: do something when collision with a enemy is identified
 	    isRunning = false;
-	}
+	}*/
 }
 
 void Game::Destroy()

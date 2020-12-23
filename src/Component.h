@@ -9,7 +9,7 @@ class Component
 {
 	
 public:
-	 Entity* owner;
+	 Entity* gameObject;
 
 	//Virtual methods because they will be overrided by each individual component
 	virtual ~Component(){}

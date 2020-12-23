@@ -50,8 +50,8 @@ public:
 	}
 
 	void Initialize() override {
-		transform = owner->GetComponent<TransformComponent>();
-		sprite = owner->GetComponent<SpriteComponent>();
+		transform = gameObject->GetComponent<TransformComponent>();
+		sprite = gameObject->GetComponent<SpriteComponent>();
 	}
 	void Update(float deltaTime) override {
 		//If key pressed get the key and handle

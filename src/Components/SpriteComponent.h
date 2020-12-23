@@ -77,7 +77,7 @@ public:
 	}
 
 	void Initialize() override {
-		transform = owner->GetComponent<TransformComponent>();
+		transform = gameObject->GetComponent<TransformComponent>();
 		sourceRect.x = 0;
 		sourceRect.y = 0;
 		sourceRect.w = transform->width;//Dimentions of the sprite are gonna be equal to the transform widht and height
