@@ -77,29 +77,42 @@ public:
 	}
 
 	void Initialize() override {
-		transform = gameObject->GetComponent<TransformComponent>();
-		sourceRect.x = 0;
-		sourceRect.y = 0;
-		sourceRect.w = transform->width;//Dimentions of the sprite are gonna be equal to the transform widht and height
-		sourceRect.h = transform->height;
+		//If this gameObject already has a transform component then initialize its dimentions to match the transform
+		if (gameObject->HasComponent<TransformComponent>())
+		{
+			transform = gameObject->GetComponent<TransformComponent>();
+			sourceRect.x = 0;
+			sourceRect.y = 0;
+			sourceRect.w = transform->width;//Dimentions of the sprite are gonna be equal to the transform widht and height
+			sourceRect.h = transform->height;
+		}
+		else
+		{
+			std::cerr << "Error initializing Sprite Component, this object does not have a Transform, this object will be initialized without a sprite..." << "\n" << "Object: " << gameObject->name << std::endl;
+		}
 	}
 
 	//Width changes animations same direction, height changes animation direction
 	void Update(float deltaTime) override {
-		if (isAnimated) {
-			//This pretty much goes back and forth between animations squares on the spritesheet, using mod so we dont go over
-			sourceRect.x = sourceRect.w * static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames); //Shifts 32 32 32 32 on x on the spritesheet, goes back and forth due to the mod
+		if (gameObject->HasComponent<TransformComponent>()) {
+			if (isAnimated) {
+				//This pretty much goes back and forth between animations squares on the spritesheet, using mod so we dont go over
+				sourceRect.x = sourceRect.w * static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames); //Shifts 32 32 32 32 on x on the spritesheet, goes back and forth due to the mod
+			}
+			//animationIndex meaning which row of the spritesheet it is times the animations height (size of each animation square on the spritesheet)
+			sourceRect.y = animationIndex * transform->height;
+			destinationRect.x = static_cast<int>(transform->position.x) - (isFixed ? 0 : Game::camera.x);//Only subtract if sprite is not fixed
+			destinationRect.y = static_cast<int>(transform->position.y) - (isFixed ? 0 : Game::camera.y);
+			destinationRect.w = transform->width * transform->scale;
+			destinationRect.h = transform->height * transform->scale;
 		}
-		//animationIndex meaning which row of the spritesheet it is times the animations height (size of each animation square on the spritesheet)
-		sourceRect.y = animationIndex * transform->height;				
-		destinationRect.x = static_cast<int>(transform->position.x) - (isFixed ? 0 : Game::camera.x);//Only subtract if sprite is not fixed
-		destinationRect.y = static_cast<int>(transform->position.y) - (isFixed ? 0 : Game::camera.y);
-		destinationRect.w = transform->width * transform->scale;
-		destinationRect.h = transform->height * transform->scale;
 	}
 
 	void Render() override {
-		TextureManager::Draw(texture, sourceRect, destinationRect, spriteFlip);
+		if (gameObject->HasComponent<TransformComponent>())
+		{
+			TextureManager::Draw(texture, sourceRect, destinationRect, spriteFlip);
+		}
 	}
 };
 

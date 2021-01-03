@@ -11,6 +11,7 @@ private:
 	inline static std::vector <Entity*> entities;
 public:
 	void ClearData(); //Destroys everything
+	void Start();
 	void Update(float deltaTime);
 	void Render();
 	bool HasNoEntities();
@@ -21,6 +22,4 @@ public:
 	void PrintEntitiesList() const;
 	static bool CheckEntityCollisions(Entity* entity);
 };
-
-
 #endif

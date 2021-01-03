@@ -18,5 +18,4 @@ enum LayerType {
 	NUM_LAYERS
 };
 
-
 #endif

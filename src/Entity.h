@@ -17,13 +17,14 @@ private:
 	EntityManager& manager;
 	bool isActive;
 	std::vector<Component*> components; //List of components in this entity
-	std::map <const std::type_info*, Component*> componentTypeMap;// Contais information about the components in this entity
+	std::map <const std::type_info*, Component*> componentTypeMap;// Contains information about the components in this entity
 
 public:
 	std::string name;
 	LayerType layer;
 	Entity(EntityManager& manager); //Create a new entity with or without specifying a name
 	Entity(EntityManager& manager, std::string name,LayerType layer);
+	void Start();
 	void Update(float deltaTime);
 	void Render();
 	void Destroy();

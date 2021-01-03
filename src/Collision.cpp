@@ -2,10 +2,10 @@
 
 //Checks for collision between 2 colliders (more specifically its collider component (SDL_Rect))
 bool Collision::CheckRectangleCollision(const ColliderComponent colliderA, const ColliderComponent colliderB) {
-    if (colliderA.collider.x + colliderA.collider.w >= colliderB.collider.x &&
-        colliderB.collider.x + colliderB.collider.w >= colliderA.collider.x &&
-        colliderA.collider.y + colliderA.collider.h >= colliderB.collider.y &&
-        colliderB.collider.y + colliderB.collider.h >= colliderA.collider.y)
+    if (colliderA.colliderX() + colliderA.colliderW() >= colliderB.colliderX() &&
+        colliderB.colliderX() + colliderB.colliderW()>= colliderA.colliderX() &&
+        colliderA.colliderY() + colliderA.colliderH()>= colliderB.colliderY() &&
+        colliderB.colliderY() + colliderB.colliderH()>= colliderA.colliderY())
     {
 
         return true;

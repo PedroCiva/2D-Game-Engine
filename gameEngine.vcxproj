@@ -91,6 +91,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +150,7 @@
     <ClInclude Include="src\Components\ColliderComponent.h" />
     <ClInclude Include="src\Collision.h" />
     <ClInclude Include="src\Components\KeyboardControlComponent.h" />
+    <ClInclude Include="src\Components\TextLabelComponent.h" />
     <ClInclude Include="src\Components\SpriteComponent.h" />
     <ClInclude Include="src\Components\TileComponent.h" />
     <ClInclude Include="src\Components\TransformComponent.h" />
@@ -413,7 +415,7 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\LayerMatrix.h" />
     <ClInclude Include="src\Map.h" />
-    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\PlayerScript.h" />
     <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -562,9 +564,10 @@
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\Collision.cpp" />
-    <ClCompile Include="src\Colors.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\EntityManager.cpp" />
+    <ClInclude Include="src\FontManager.h" />
+    <ClCompile Include="src\FontManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\LayerMatrix.cpp" />
     <ClCompile Include="src\Main.cpp" />

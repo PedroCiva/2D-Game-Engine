@@ -8,6 +8,7 @@
 #include <../src/Components/SpriteComponent.h>
 #include <../src/Components/ColliderComponent.h>
 #include <../src/Components/KeyboardControlComponent.h> 
+#include <../src/Components/TextLabelComponent.h> 
 #include <../libs/glm/glm.hpp>
 
 EntityManager manager;
@@ -43,6 +44,11 @@ void Game::Initialize(int width, int height)
 		return;
 	}
 
+	if (TTF_Init() != 0)
+	{
+		std::cerr << "Error initializing SDL_TTF" << std::endl;
+	}
+		
 	window = SDL_CreateWindow("My 2d Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_BORDERLESS);
 	if (!window)
 	{
@@ -69,30 +75,28 @@ void Game::LoadLevel(int levelNumber){
 
 	LayerMatrix layerMatrix;
 
-	//TO DO -
-	//Add call to EntityManager.Initialize() to initialize all entities
-	//manager.Initialize();
-
 	//Start including new assets to the AssetManager list
 	assetManager->AddTexture("tank-image", "./assets/images/tank-big-right.png"); //Adding texture to texture manager
 	assetManager->AddTexture("chopper-image", "./assets/images/chopper-spritesheet.png"); //Adding texture to texture manager
 	assetManager->AddTexture("jungle-tiletexture", "./assets/tilemaps/jungle.png");
+	assetManager->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 14);
 
 	map = new Map("jungle-tiletexture", 2, 32); //Scale size 1 and tile size 32 by 32
 	map->LoadMap("./assets/tilemaps/jungle.map", 25, 20); // map size is 25 tiles by 20 tiles
 
 	//Start including entities and also components to them
-
-	player.AddComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
+	player.AddComponent<TransformComponent>(32,32);
 	player.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
-	player.AddComponent<ColliderComponent>();
 	player.AddComponent <KeyboardControlComponent>("up", "right", "down", "left", "space");
 
 
 	Entity& tank(manager.AddEntity("tank",ENEMY_LAYER));
 	tank.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tank.AddComponent<SpriteComponent>("tank-image");
-	tank.AddComponent<ColliderComponent>();
+	tank.AddComponent<ColliderComponent>(32,32);
+
+	Entity& labelLevelName(manager.AddEntity("LabelLevelName", UI_LAYER));
+	labelLevelName.AddComponent<TextLabelComponent>(10, 10, "First Level...", "charriot-font", Color::Red.toSDLColor());
 
 	manager.PrintEntitiesList();
 }

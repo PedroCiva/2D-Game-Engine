@@ -14,12 +14,27 @@ public:
 	int height;
 	int scale;
 
+	TransformComponent() {
+		//If no parameters were specified then initialize these default values
+		position = glm::vec2(0, 0);
+		velocity = glm::vec2(0, 0);
+		width = 32;
+		height = 32;
+		scale = 1;
+	}
 	TransformComponent(int posX, int posY, int velX, int velY, int w, int h, int s) {
 		position = glm::vec2(posX, posY);
 		velocity = glm::vec2(velX, velY);
 		width = w;
 		height = h;
 		scale = s;
+	}
+	TransformComponent(int posX, int posY){
+		position = glm::vec2(posX, posY);
+		velocity = glm::vec2(0, 0);
+		width = 32;
+		height = 32;
+		scale = 1;
 	}
 
 	void Initialize() override {

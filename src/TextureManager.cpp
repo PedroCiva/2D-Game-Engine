@@ -16,7 +16,7 @@ void TextureManager::Draw(SDL_Texture* texture, SDL_Rect sourceRect, SDL_Rect de
 	SDL_RenderCopyEx(Game::renderer, texture, &sourceRect, &destinationRect, 0.0, NULL, flip); //Draws the texture on the screen using our renderer and texture plus some position information from the SDL_Rect's
 }
 
-void TextureManager::DrawOutline(SDL_Rect rectangle,glm::vec4 color) {
-	SDL_SetRenderDrawColor(Game::renderer, color.x, color.y, color.z, color.w);
+void TextureManager::DrawOutline(SDL_Rect rectangle,ColorValues color) {
+	SDL_SetRenderDrawColor(Game::renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderDrawRect(Game::renderer, &rectangle);
 }

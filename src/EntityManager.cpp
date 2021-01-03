@@ -12,6 +12,10 @@ void EntityManager::ClearData() {
 		entity->Destroy();
 }
 
+void EntityManager::Start() {
+	for (auto& entity : entities)
+		entity->Start();
+}
 void EntityManager::Update(float deltaTime) {
 	for (auto& entity : entities)
 		entity->Update(deltaTime);
