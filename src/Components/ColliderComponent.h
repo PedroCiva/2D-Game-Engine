@@ -1,7 +1,7 @@
 #ifndef COLLIDERCOMPONENT_H
 #define COLLIDERCOMPONENT_H
 
-#include <../../SDL2/include/SDL.h>
+#include "../SDL2/include/SDL.h"
 #include "../Game.h"
 #include "../EntityManager.h"
 #include "TransformComponent.h"

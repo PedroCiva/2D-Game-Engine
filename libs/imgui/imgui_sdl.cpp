@@ -1,7 +1,7 @@
 #include "imgui_sdl.h"
 
 #ifdef WIN32
-#include <SDL.h>
+#include "../../SDL2/include/SDL.h"
 #else
 #include <SDL2/SDL.h>
 #endif

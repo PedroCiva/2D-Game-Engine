@@ -1,10 +1,10 @@
 #ifndef TILECOMPONENT_H
 #define TILECOMPONENT_H
 
-#include <../../SDL2/include/SDL.h>
+#include "../SDL2/include/SDL.h"
 #include "../EntityManager.h"
 #include "../AssetManager.h"
-#include <../libs/glm/glm.hpp>
+#include "../../libs/glm/glm.hpp"
 
 class TileComponent : public Component {
 public : 

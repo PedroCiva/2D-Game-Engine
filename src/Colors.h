@@ -1,10 +1,15 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-#include <../libs/glm/glm.hpp>
-#include <../../SDL2/include/SDL.h>
+#include "../libs/glm/glm.hpp"
+#include "../SDL2/include/SDL.h"
 #include <iostream>
 
+
+
+/// <summary>
+/// My own struct for colors
+/// </summary>
 typedef struct ColorValues
 {
 public:

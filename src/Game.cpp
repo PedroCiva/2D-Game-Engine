@@ -4,12 +4,12 @@
 #include "AssetManager.h"
 #include "Map.h"
 #include "LayerMatrix.h"
-#include <../src/Components/TransformComponent.h>
-#include <../src/Components/SpriteComponent.h>
-#include <../src/Components/ColliderComponent.h>
-#include <../src/Components/KeyboardControlComponent.h> 
-#include <../src/Components/TextLabelComponent.h> 
-#include <../libs/glm/glm.hpp>
+#include "Components/TransformComponent.h"
+#include "Components/SpriteComponent.h"
+#include "Components/ColliderComponent.h"
+#include "Components/KeyboardControlComponent.h"
+#include "Components/TextLabelComponent.h"
+#include "../libs/glm/glm.hpp"
 
 EntityManager manager;
 //Passing entity manager "manager" here because our AssetManager constructor requires it.. making it on the heap so its alive throughout the program
@@ -79,6 +79,8 @@ void Game::LoadLevel(int levelNumber){
 	assetManager->AddTexture("tank-image", "./assets/images/tank-big-right.png"); //Adding texture to texture manager
 	assetManager->AddTexture("chopper-image", "./assets/images/chopper-spritesheet.png"); //Adding texture to texture manager
 	assetManager->AddTexture("jungle-tiletexture", "./assets/tilemaps/jungle.png");
+	assetManager->AddTexture("projectile-image", "./assets/images/bullet-enemy.png");
+	assetManager->AddTexture("heliport-image", "./assets/images/heliport.png");
 	assetManager->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 14);
 
 	map = new Map("jungle-tiletexture", 2, 32); //Scale size 1 and tile size 32 by 32
@@ -89,11 +91,21 @@ void Game::LoadLevel(int levelNumber){
 	player.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 	player.AddComponent <KeyboardControlComponent>("up", "right", "down", "left", "space");
 
+	Entity& heliport(manager.AddEntity("Heliport",OBSTACLE_LAYER));
+	heliport.AddComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
+	heliport.AddComponent<SpriteComponent>("heliport-image");
+	heliport.AddComponent<ColliderComponent>(32, 32);
 
 	Entity& tank(manager.AddEntity("tank",ENEMY_LAYER));
 	tank.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tank.AddComponent<SpriteComponent>("tank-image");
 	tank.AddComponent<ColliderComponent>(32,32);
+
+	Entity& projectile(manager.AddEntity("projectile", PROJECTILE_LAYER));
+	projectile.AddComponent<TransformComponent>(16, 16, 0, 0, 4, 4, 1);
+	projectile.AddComponent<SpriteComponent>("projectile-image");
+	projectile.AddComponent<ColliderComponent>(16,16);
+	//projectile.AddComponent<ProjectileEmitterComponent>(50,270,200,true);
 
 	Entity& labelLevelName(manager.AddEntity("LabelLevelName", UI_LAYER));
 	labelLevelName.AddComponent<TextLabelComponent>(10, 10, "First Level...", "charriot-font", Color::Red.toSDLColor());

@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+#include "../libs/magic_enum/include/magic_enum.hpp"
 
 
 /*LayerMatrix::LayerMatrix() {
@@ -9,18 +10,11 @@
 }*/
 std::string LayerMatrix::LayerNameToString(LayerType layer)
 {
-	switch (layer)
-	{
-	case TILEMAP_LAYER: return "TILEMAP_LAYER";       //0
-	case VEGETATION_LAYER: return "VEGETATION_LAYER"; //1
-	case ENEMY_LAYER: return "ENEMY_LAYER";		      //2
-	case PLAYER_LAYER: return "PLAYER_LAYER";		  //3
-	case PROJECTILE_LAYER: return "PROJECTILE_LAYER"; //4		
-	case UI_LAYER: return "UI_LAYER";	              //5
-	}
+	auto layer_name = magic_enum::enum_name(layer);
+	return static_cast<std::string>(layer_name);
 }
 
-int  LayerMatrix::GetLayerStringLenght(int currentLayer)
+int LayerMatrix::GetLayerStringLenght(int currentLayer)
 {
 	int lenght = 0;
 	for (int x = 0; LayerNameToString((LayerType)currentLayer)[x] != '\0'; x++) {
@@ -29,7 +23,7 @@ int  LayerMatrix::GetLayerStringLenght(int currentLayer)
 	return lenght;
 }
 
-void  LayerMatrix::PrintCollisionsLayersMatrix()
+void LayerMatrix::PrintCollisionsLayersMatrix()
 {
 	//Populating layersArray backwards
 	for (int x = (NUM_LAYERS - 1); x > -1; x--)
@@ -46,9 +40,9 @@ void  LayerMatrix::PrintCollisionsLayersMatrix()
 	largeWidthOffset += EXTRA_OFFSET; //Adding small offset
 
 	//Print layers vertically
-	for (int currentLayer = (UI_LAYER); currentLayer > -1; currentLayer--) //For every layer backwards
+	for (int currentLayer = (NUM_LAYERS-1); currentLayer > -1; currentLayer--) //For every layer backwards
 	{
-		if (currentLayer == UI_LAYER)
+		if (currentLayer == (NUM_LAYERS-1))
 		{
 			std::cout << std::setw(largeWidthOffset) << "";
 		}
@@ -108,7 +102,7 @@ void  LayerMatrix::PrintCollisionsLayersMatrix()
 	ResetGlobalVariables(); //Reset our global variable
 }
 
-void  LayerMatrix::ResetGlobalVariables()
+void LayerMatrix::ResetGlobalVariables()
 {
 	stringIndex = 0;
 	largeWidthOffset = 0;
@@ -117,7 +111,7 @@ void  LayerMatrix::ResetGlobalVariables()
 	checkBoxIsFirst = true;
 }
 
-void  LayerMatrix::InitializeGlobalVariables()
+void LayerMatrix::InitializeGlobalVariables()
 {
 	//Initializing checkboxes 2D array columns
 	for (int i = 0; i < NUM_ROWS; i++)

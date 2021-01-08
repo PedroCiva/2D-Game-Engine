@@ -1,8 +1,8 @@
 #ifndef TEXTLABELCOMPONENT_H
 #define TEXTLABELCOMPONENT_H
 
-#include <../../SDL2/include/SDL.h>
-#include <../../SDL2/include/SDL_ttf.h>
+#include "../SDL2/include/SDL.h"
+#include "../SDL2/include/SDL_ttf.h"
 #include "../FontManager.h"
 #include "../EntityManager.h"
 #include "../AssetManager.h"

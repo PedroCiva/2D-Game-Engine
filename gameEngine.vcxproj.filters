@@ -837,6 +837,12 @@
     <ClInclude Include="src\FontManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="libs\magic_enum\include\magic_enum.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\ProjectileEmitterComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="libs\glm\detail\func_common.inl">

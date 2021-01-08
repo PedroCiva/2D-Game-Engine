@@ -1,7 +1,7 @@
 #ifndef COLLISION_H
 #define COLLISION_H
 
-#include <../../SDL2/include/SDL.h>
+#include "../SDL2/include/SDL.h"
 #include "../src/Components/ColliderComponent.h"
 
 class Collision {

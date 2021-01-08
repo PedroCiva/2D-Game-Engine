@@ -15,6 +15,7 @@ enum LayerType {
 	PLAYER_LAYER = 3,
 	PROJECTILE_LAYER = 4,
 	UI_LAYER = 5,
+	OBSTACLE_LAYER=6,
 	NUM_LAYERS
 };
 
