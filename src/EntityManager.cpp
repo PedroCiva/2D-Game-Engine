@@ -8,30 +8,35 @@
 ColliderComponent ColliderComponent::otherColliderComponent;
 
 void EntityManager::ClearData() {
-	for (auto& entity : entities)
-		entity->Destroy();
+	entities.clear();
 }
 
 void EntityManager::Start() {
 	for (auto& entity : entities)
 		entity->Start();
 }
+
 void EntityManager::Update(float deltaTime) {
-	for (auto& entity : entities)
-		entity->Update(deltaTime);
-
-	//Checking and destroying any inactive entities
-	DestroyInactiveEntities();
-}
-
-void EntityManager::DestroyInactiveEntities() {
-	for (int i = 0; i < entities.size(); i++) {
-		if (!entities[i]->IsActive()) {
-			//Erase element at index
-			entities.erase(entities.begin() + i);
+	for (auto& entity : entities) 
+	{
+		if (entity->IsActive())
+		{
+			entity->Update(deltaTime);
 		}
 	}
 }
+
+void EntityManager::DestroyEntity(Entity* entity) {
+	
+	auto entityToDestroy = std::find(entities.begin(), entities.end(), entity);
+	int index = std::distance(entities.begin(), entityToDestroy);
+
+	if (entityToDestroy != entities.end())
+		std::cout << "Destroying entity" << entities[index]->name << std::endl;
+
+	entities.erase(entities.begin() + index);
+}
+
 void EntityManager::Render() {
 	for (int layerNumber = 0; layerNumber < NUM_LAYERS; layerNumber++) {
 		for (auto& entity : GetEntitiesByLayer(static_cast<LayerType>(layerNumber)))

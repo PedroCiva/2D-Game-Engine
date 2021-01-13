@@ -14,6 +14,7 @@ class Component;
 
 class Entity {
 private:
+	Entity* thisEntity;
 	EntityManager& manager;
 	bool isActive;
 	std::vector<Component*> components; //List of components in this entity
@@ -29,8 +30,8 @@ public:
 	void Render();
 	void Destroy();
 	std::string GetComponentsName() const;
-	bool IsActive() const; //Getter for isActive, allows for if(Entity.IsActive()==true) etc...
-
+	void SetActive(bool choice);
+	bool IsActive() const;
 	template <typename T, typename... TArgs> //Add component method template.
 	T& AddComponent(TArgs&&... args) { //TArgs have a double ampersand because the values passed are rvalues,roughly meaning we just wanna use them once 
 		T* newComponent(new T(std::forward<TArgs>(args)...)); //Creating new component of type T and managing the args to handle our rvalues parameters with std::forward

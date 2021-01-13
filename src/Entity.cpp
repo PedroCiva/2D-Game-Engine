@@ -4,6 +4,7 @@
 
 //Creates entity and sets isActive to true
 Entity::Entity(EntityManager& manager) : manager(manager) {
+	this->thisEntity = this;
 	this->isActive = true;
 	this->AddComponent<TransformComponent>();
 }
@@ -18,17 +19,30 @@ void Entity::Start() {
 }
 void Entity::Update(float deltaTime) {
 	//Foreach component <T> in components
-	for(auto& component : components)	
-		component->Update(deltaTime);	
+	for (auto& component : components) 
+	{
+		if(this->isActive)
+			component->Update(deltaTime);
+	}		
 }
 
 void Entity::Render() {
 
 	for (auto& component : components)
-		component->Render();
+	{
+		if(this->isActive)
+			component->Render();
+	}		
 }
 void Entity::Destroy() {
-	this->isActive = false;
+	manager.DestroyEntity(this->thisEntity);
+}
+
+void Entity::SetActive(bool choice) {
+	if (choice == true)
+		this->isActive = true;
+	else
+		this->isActive = false;
 }
 
 bool Entity::IsActive() const {
