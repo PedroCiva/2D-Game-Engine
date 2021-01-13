@@ -28,13 +28,14 @@ void EntityManager::Update(float deltaTime) {
 
 void EntityManager::DestroyEntity(Entity* entity) {
 	
-	auto entityToDestroy = std::find(entities.begin(), entities.end(), entity);
+	auto entityToDestroy = std::find_if(entities.begin(), entities.end(), [=](Entity* p) { return p->GetEntity() == entity->GetEntity(); });
 	int index = std::distance(entities.begin(), entityToDestroy);
-
-	if (entityToDestroy != entities.end())
+	if (entityToDestroy != entities.end()) 
+	{
 		std::cout << "Destroying entity" << entities[index]->name << std::endl;
-
-	entities.erase(entities.begin() + index);
+		entities.erase(entities.begin() + index);
+	}
+		
 }
 
 void EntityManager::Render() {
@@ -102,27 +103,29 @@ bool EntityManager::CheckEntityCollisions(Entity* entity){
 		ColliderComponent* thisCollider = thisEntity->GetComponent<ColliderComponent>();
 
 		//Looping through all entities to check for collision with thisCollider (comes from thisEntity)
-		for (int j = 0; j < entities.size(); j++) 
+		for (int j = 0; j < entities.size(); j++)
 		{
-			auto& thatEntity = entities[j];
-
-			//If the colliders have different names and thatEntity has a collider component
-			if (thisEntity->name.compare(thatEntity->name) != 0 && thatEntity->HasComponent<ColliderComponent>()) 
+			if (thisEntity->name.compare(entities[j]->name) != 0 && entities[j]->HasComponent<ColliderComponent>() && entities[j]->layer != TILEMAP_LAYER)
 			{
+				auto& thatEntity = entities[j];
+
+				//If the colliders have different names and thatEntity has a collider component
+
+
 				ColliderComponent* thatCollider = thatEntity->GetComponent<ColliderComponent>();
-				
-				if (Collision::CheckRectangleCollision(*thisCollider, *thatCollider))
-				{		
+
+				if (Collision::CheckRectangleCollision(thisCollider->collider, thatCollider->collider))
+				{
 					//Set the otherColliderComponent to thatCollider (for use on OnCollisionEnter in ColliderComponent.h)
 					ColliderComponent::otherColliderComponent = *thatCollider;
 
 					//If there is a collision, check if the 2 objects even should collide based on the Collision Layer Matrix
 					return (LayerMatrix::ShouldCollide(thisCollider->gameObject->layer, thatCollider->gameObject->layer));
-				}	
-				//If there is no collision between them return false
-				return false;
+				}
 			}
 		}
+		//If no collisions at all
+		return false;
 	}
 }
 

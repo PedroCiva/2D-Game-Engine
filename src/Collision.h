@@ -7,7 +7,7 @@
 class Collision {
 public:
 	//Checks for collision between 2 colliders (more specifically its collider component (SDL_Rect))
-	static bool CheckRectangleCollision(const ColliderComponent colliderA, const ColliderComponent colliderB);
+	static bool CheckRectangleCollision(const SDL_Rect& rectangleA, const SDL_Rect& rectangleB);
 	Entity* gameObject;
 	static Collision* collision;
 	TransformComponent* transform;

@@ -25,6 +25,7 @@ public:
 	LayerType layer;
 	Entity(EntityManager& manager); //Create a new entity with or without specifying a name
 	Entity(EntityManager& manager, std::string name,LayerType layer);
+	Entity* GetEntity() { return this->thisEntity; };
 	void Start();
 	void Update(float deltaTime);
 	void Render();

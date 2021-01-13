@@ -1,14 +1,11 @@
 #include "Collision.h"
 
 //Checks for collision between 2 colliders (more specifically its collider component (SDL_Rect))
-bool Collision::CheckRectangleCollision(const ColliderComponent colliderA, const ColliderComponent colliderB) {
-    if (colliderA.colliderX() + colliderA.colliderW() >= colliderB.colliderX() &&
-        colliderB.colliderX() + colliderB.colliderW()>= colliderA.colliderX() &&
-        colliderA.colliderY() + colliderA.colliderH()>= colliderB.colliderY() &&
-        colliderB.colliderY() + colliderB.colliderH()>= colliderA.colliderY())
-    {
-
-        return true;
-    }
-    return false;        
+bool Collision::CheckRectangleCollision(const SDL_Rect& rectangleA, const SDL_Rect& rectangleB) {
+    return (
+        rectangleA.x + rectangleA.w >= rectangleB.x &&
+        rectangleB.x + rectangleB.w >= rectangleA.x &&
+        rectangleA.y + rectangleA.h >= rectangleB.y &&
+        rectangleB.y + rectangleB.h >= rectangleA.y
+        );
 }

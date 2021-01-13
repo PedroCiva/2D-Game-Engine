@@ -9,6 +9,7 @@ Entity::Entity(EntityManager& manager) : manager(manager) {
 	this->AddComponent<TransformComponent>();
 }
 Entity::Entity(EntityManager& manager,std::string name, LayerType layer) : manager(manager), name(name), layer(layer) {
+	this->thisEntity = this;
 	this->isActive = true;
 	this->AddComponent<TransformComponent>();
 }

@@ -72,6 +72,7 @@ void Game::Initialize(int width, int height)
 }
 
 Entity& player(manager.AddEntity("Player", PLAYER_LAYER));
+Entity& tank(manager.AddEntity("tank", ENEMY_LAYER));
 void Game::LoadLevel(int levelNumber){
 
 	LayerMatrix layerMatrix;
@@ -90,22 +91,23 @@ void Game::LoadLevel(int levelNumber){
 	//Start including entities and also components to them
 	player.AddComponent<TransformComponent>(32,32);
 	player.AddComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
+	player.AddComponent<ColliderComponent>();
 	player.AddComponent <KeyboardControlComponent>("up", "right", "down", "left", "space");
 
 	Entity& heliport(manager.AddEntity("Heliport",OBSTACLE_LAYER));
 	heliport.AddComponent<TransformComponent>(470, 420, 0, 0, 32, 32, 1);
 	heliport.AddComponent<SpriteComponent>("heliport-image");
-	heliport.AddComponent<ColliderComponent>(32, 32);
+	heliport.AddComponent<ColliderComponent>();
 
-	Entity& tank(manager.AddEntity("tank",ENEMY_LAYER));
-	tank.AddComponent<TransformComponent>(150, 495, 5, 0, 32, 32, 1);
+
+	tank.AddComponent<TransformComponent>(50, 50, 0, 0, 32, 32, 1);
 	tank.AddComponent<SpriteComponent>("tank-image");
-	tank.AddComponent<ColliderComponent>(32,32);
+	tank.AddComponent<ColliderComponent>();
 
 	Entity& projectile(manager.AddEntity("projectile", PROJECTILE_LAYER));
 	projectile.AddComponent<TransformComponent>(150+16,495+16, 0, 0, 4, 4, 1);
 	projectile.AddComponent<SpriteComponent>("projectile-image");
-	projectile.AddComponent<ColliderComponent>(16,16);
+	projectile.AddComponent<ColliderComponent>();
 	projectile.AddComponent<ProjectileEmitterComponent>(50,270,200,true);
 
 	Entity& labelLevelName(manager.AddEntity("LabelLevelName", UI_LAYER));
@@ -181,11 +183,10 @@ void Game::HandleCameraMovement() {
 }
 
 void Game::CheckCollisions() {
-	/*std::string collisionTagType = manager.CheckEntityCollisions(player);
-	if (collisionTagType.compare("enemy") == 0) {
-		//TODO: do something when collision with a enemy is identified
-	    isRunning = false;
-	}*/
+	if (manager.CheckEntityCollisions(&player))
+	{
+		tank.Destroy();
+	}
 }
 
 void Game::Destroy()
