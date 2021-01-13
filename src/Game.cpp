@@ -9,6 +9,7 @@
 #include "Components/ColliderComponent.h"
 #include "Components/KeyboardControlComponent.h"
 #include "Components/TextLabelComponent.h"
+#include "Components/ProjectileEmitterComponent.h"
 #include "../libs/glm/glm.hpp"
 
 EntityManager manager;
@@ -97,15 +98,15 @@ void Game::LoadLevel(int levelNumber){
 	heliport.AddComponent<ColliderComponent>(32, 32);
 
 	Entity& tank(manager.AddEntity("tank",ENEMY_LAYER));
-	tank.AddComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	tank.AddComponent<TransformComponent>(150, 495, 5, 0, 32, 32, 1);
 	tank.AddComponent<SpriteComponent>("tank-image");
 	tank.AddComponent<ColliderComponent>(32,32);
 
 	Entity& projectile(manager.AddEntity("projectile", PROJECTILE_LAYER));
-	projectile.AddComponent<TransformComponent>(16, 16, 0, 0, 4, 4, 1);
+	projectile.AddComponent<TransformComponent>(150+16,495+16, 0, 0, 4, 4, 1);
 	projectile.AddComponent<SpriteComponent>("projectile-image");
 	projectile.AddComponent<ColliderComponent>(16,16);
-	//projectile.AddComponent<ProjectileEmitterComponent>(50,270,200,true);
+	projectile.AddComponent<ProjectileEmitterComponent>(50,270,200,true);
 
 	Entity& labelLevelName(manager.AddEntity("LabelLevelName", UI_LAYER));
 	labelLevelName.AddComponent<TextLabelComponent>(10, 10, "First Level...", "charriot-font", Color::Red.toSDLColor());

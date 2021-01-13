@@ -19,6 +19,18 @@ void EntityManager::Start() {
 void EntityManager::Update(float deltaTime) {
 	for (auto& entity : entities)
 		entity->Update(deltaTime);
+
+	//Checking and destroying any inactive entities
+	DestroyInactiveEntities();
+}
+
+void EntityManager::DestroyInactiveEntities() {
+	for (int i = 0; i < entities.size(); i++) {
+		if (!entities[i]->IsActive()) {
+			//Erase element at index
+			entities.erase(entities.begin() + i);
+		}
+	}
 }
 void EntityManager::Render() {
 	for (int layerNumber = 0; layerNumber < NUM_LAYERS; layerNumber++) {

@@ -21,5 +21,6 @@ public:
 	unsigned int GetEntityCount();
 	void PrintEntitiesList() const;
 	static bool CheckEntityCollisions(Entity* entity);
+	void DestroyInactiveEntities();
 };
 #endif

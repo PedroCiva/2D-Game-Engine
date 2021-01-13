@@ -1,1 +1,16 @@
-﻿  gameEngine.vcxproj -> C:\Users\pwilt\source\repos\gameEngine\Debug\gameEngine.exe
+﻿  Game.cpp
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Components\ColliderComponent.h(24,42): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Components\ColliderComponent.h(25,42): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Components\ColliderComponent.h(26,42): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Components\ColliderComponent.h(27,42): warning C4244: 'return': conversion from 'const int' to 'float', possible loss of data
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Game.cpp(173,67): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\pwilt\source\repos\gameEngine\gameEngine\src\Game.cpp(174,67): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  gameEngine.vcxproj -> C:\Users\pwilt\source\repos\gameEngine\Debug\gameEngine.exe
