@@ -1243,6 +1243,7 @@
     </None>
     <None Include="libs\.DS_Store" />
     <None Include="src\.DS_Store" />
+    <None Include="assets\scripts\Level1.lua" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libs\glm\detail\glm.cpp">

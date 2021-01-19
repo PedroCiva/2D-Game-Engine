@@ -56,7 +56,7 @@ public:
 			//Animation *singleAnimation = new Animation(0, numFrames, animationSpeed);
 			//Animation singleAnimation(0, numFrames, animationSpeed);
 			Animation singleAnimation = Animation(0, numFrames, animationSpeed);
-			animations.emplace("SingleAnimations", singleAnimation); //Adding animation to our map
+			animations.emplace("SingleAnimation", singleAnimation); //Adding animation to our map
 			this->animationIndex = 0;
 			this->currentAnimationName = "SingleAnimation";
 		}
@@ -94,7 +94,6 @@ public:
 
 	//Width changes animations same direction, height changes animation direction
 	void Update(float deltaTime) override {
-		if (gameObject->HasComponent<TransformComponent>()) {
 			if (isAnimated) {
 				//This pretty much goes back and forth between animations squares on the spritesheet, using mod so we dont go over
 				sourceRect.x = sourceRect.w * static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames); //Shifts 32 32 32 32 on x on the spritesheet, goes back and forth due to the mod
@@ -104,8 +103,7 @@ public:
 			destinationRect.x = static_cast<int>(transform->position.x) - (isFixed ? 0 : Game::camera.x);//Only subtract if sprite is not fixed
 			destinationRect.y = static_cast<int>(transform->position.y) - (isFixed ? 0 : Game::camera.y);
 			destinationRect.w = transform->width * transform->scale;
-			destinationRect.h = transform->height * transform->scale;
-		}
+			destinationRect.h = transform->height * transform->scale;		
 	}
 
 	void Render() override {

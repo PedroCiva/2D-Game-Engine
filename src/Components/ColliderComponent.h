@@ -10,8 +10,6 @@
 class ColliderComponent : public Component {
 public : 
 	SDL_Rect collider;
-	SDL_Rect sourceRectangle;
-	SDL_Rect destinationRectangle;
 	TransformComponent* transform;
 	static ColliderComponent otherColliderComponent;
 	bool isTrigger;
@@ -31,21 +29,16 @@ public :
 		if (gameObject->HasComponent<TransformComponent>())
 		{
 			transform = gameObject->GetComponent<TransformComponent>();
-			sourceRectangle = { 0,0, transform->width,transform->height }; //Shouldn't this be initialized to the transform X and Y as well?
-			//Always remember the destination rectangle is where and how we wanna draw the final rectangle on the screen, in this case how we want our collider to be
-			destinationRectangle = { collider.x,collider.y,collider.w,collider.h };
 		}
 	}
 
 	void Update(float deltaTime) override {
 		//Update collider position to match transform	
-		collider.x = static_cast<int>(transform->position.x);
-		collider.y = static_cast<int>(transform->position.y);
+		collider.x = static_cast<int>(transform->position.x) - Game::camera.x;
+		collider.y = static_cast<int>(transform->position.y) -Game::camera.y;
 		collider.w = transform->width * transform->scale;
 		collider.h = transform->height * transform->scale;
-		destinationRectangle.x = collider.x - Game::camera.x;
-		destinationRectangle.y = collider.y - Game::camera.y;
-		
+	
 		//If there is a collision involving this gameObject and none of the objects involved have a collider with isTrigger
 		/*if (EntityManager::CheckEntityCollisions(this->gameObject) && !this->isTrigger && !otherColliderComponent.isTrigger)
 		{

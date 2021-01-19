@@ -39,10 +39,14 @@ public:
 
 	std::string GetSDLKeyStringCode(std::string key) {
 		//SDL code for arrow keys are as follow
-		if (key.compare("up") == 0) return "1073741906";
-		if (key.compare("down") == 0) return "1073741905";
-		if (key.compare("left") == 0) return "1073741904";
-		if (key.compare("right") == 0) return "1073741903";
+		if (key.compare("w") == 0) return std::to_string(SDLK_w);
+		if (key.compare("s") == 0) return std::to_string(SDLK_s);
+		if (key.compare("a") == 0) return std::to_string(SDLK_a);
+		if (key.compare("d") == 0) return std::to_string(SDLK_d);
+		if (key.compare("up") == 0) return std::to_string(SDLK_UP);
+		if (key.compare("down") == 0) return std::to_string(SDLK_DOWN);
+		if (key.compare("left") == 0) return std::to_string(SDLK_LEFT);
+		if (key.compare("right") == 0) return std::to_string(SDLK_RIGHT);
 		//SDL code for all the other keys follow the ASCII table
 		if (key.compare("space") == 0) return "32";
 

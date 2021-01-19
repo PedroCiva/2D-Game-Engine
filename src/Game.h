@@ -4,6 +4,7 @@
 #include "../SDL2/include/SDL.h"
 #include "../SDL2/include/SDL_image.h"
 #include "../SDL2/include/SDL_ttf.h"
+#include "../libs/lua/sol.hpp"
 #include "Entity.h"
 #include "Component.h"
 #include "EntityManager.h"

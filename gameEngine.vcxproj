@@ -72,13 +72,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs\magic_enum\include;C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs;C:\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs\lua;C:\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs\magic_enum\include;C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs;C:\Users\pwilt\source\repos\gameEngine\gameEngine\SDL2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs\lua;C:\Users\pwilt\source\repos\gameEngine\gameEngine\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs\magic_enum\include;C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs;C:\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs\lua;C:\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\pwilt\source\repos\gameEngine\gameEngine\libs\lua;C:\Users\pwilt\source\repos\gameEngine\gameEngine\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
+    <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -89,7 +90,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -106,10 +107,12 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+      <AdditionalOptions>/D _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -425,6 +428,7 @@
     <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\scripts\Level1.lua" />
     <None Include="libs\.DS_Store" />
     <None Include="libs\glm\detail\func_common.inl" />
     <None Include="libs\glm\detail\func_common_simd.inl" />
